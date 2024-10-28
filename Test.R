@@ -1,11 +1,4 @@
-x <- 3+5
-x
+install.packages("usethis")
+library(usethis)
 
-y <- 1+4
-y
-
-ss
-
-
-git config --global user.email "sebastian-rothaug@gmx.de"
-git config --global user.name "Your Name"
+use_git_config(user.name = "SebastianRothaug", user.email = "sebastian-rothaug@gmx.de")
