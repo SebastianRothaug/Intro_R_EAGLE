@@ -41,6 +41,9 @@ plot(elevation_ita_crop)
 elevation_ita_mask <- terra::mask(elevation_ita_crop, ita.r)
 plot(elevation_ita_mask)
 
+tiny.countries <- ne_countries(type ="tiny_countries", scale=10,return="sf")
+plot(tiny.countries)
+
 rus <- ne_countries(country="Russia", scale="medium",return="sf")
 plot(rus)
 
