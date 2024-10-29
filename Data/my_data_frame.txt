@@ -1,0 +1,8 @@
+"Name" "Location" "Number"
+"1" "Sebastian" "Germany" 1
+"2" "David" "France" 44
+"3" "Lutz" "Germany" 2
+"4" "Anna" "Italy" 6
+"5" "Jannis" "USA" 7
+"6" "Christian" "Denmark" 3
+"7" "Charl" "Africa" 9
