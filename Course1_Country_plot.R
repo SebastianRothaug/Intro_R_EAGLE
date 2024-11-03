@@ -10,7 +10,7 @@ library(rnaturalearth)
 ger <- ne_countries(country="Germany", scale="medium",return="sf") #country shapes from rnaturalearth load
 plot(ger)    #country ploten
 
-clim <- geodata::worldclim_global(var = 'tmin', res = 10, download = T, path = 'C:/Users/User/Desktop/R Course Intro to Programming')
+clim <- geodata::worldclim_global(var = 'tmin', res = 10, download = T, path = 'C:/Users/User/Desktop/R_Course')
 #world climate data var = 'tmin' --> tempreture min, aus geodata Package laden
 plot(clim)  #Minimum Temp Map Worldwide ploten
 
@@ -41,8 +41,11 @@ plot(elevation_ita_crop)
 elevation_ita_mask <- terra::mask(elevation_ita_crop, ita.r)
 plot(elevation_ita_mask)
 
+
+
 tiny.countries <- ne_countries(type ="tiny_countries", scale=10,return="sf")
 plot(tiny.countries)
+
 
 rus <- ne_countries(country="Russia", scale="medium",return="sf")
 plot(rus)
