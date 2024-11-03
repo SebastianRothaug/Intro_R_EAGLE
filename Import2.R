@@ -59,3 +59,15 @@ df0
 df0["A"]
 
 df0$B[3] #Abfrage mit Bedingung
+
+
+#week2 slides 104
+df_a <- data.frame(plot="location_name_1", measure1=runif(100)*1000,measure2=round(runif(100)*100), value=rnorm(100,2,1) ,ID=rep(LETTERS,100)[1:100])
+df_a
+
+df_b <- data.frame(plot="location_name_2", measure1=runif(50)*100,measure2=round(runif(50)*10), value=rnorm(50) ,ID=rep(LETTERS,50)[1:50])
+df_b
+
+df_combined <- rbind(df_a, df_b)
+df_combined
+summary(df_combined)
