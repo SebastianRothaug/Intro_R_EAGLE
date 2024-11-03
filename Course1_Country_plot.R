@@ -30,7 +30,7 @@ ita <- ne_countries(country="Italy", scale="medium",return="sf")
 plot(ita)
 
 
-elevation <- geodata::elevation_global(res = 10, download = T, path = 'C:/Users/User/Desktop/R Course Intro to Programming')
+elevation <- geodata::elevation_global(res = 10, download = T, path = 'C:/Users/User/Desktop/R_Course')
 plot(elevation)
 
 ita.r <- st_transform(ita, st_crs(elevation))
