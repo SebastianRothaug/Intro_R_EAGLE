@@ -1,4 +1,4 @@
-setwd("C:/Users/User/Desktop/R Course Intro to Programming/Intro_R_EAGLE/Data")
+setwd("C:/Users/User/Desktop/R_Course/Intro_R_EAGLE/Data")
 #set working directory to show the computer where to grab and store the data
 
 list.files() #listen up the files in the working directorty
