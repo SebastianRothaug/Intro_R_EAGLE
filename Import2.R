@@ -1,4 +1,4 @@
-setwd("C:/Users/User/Desktop/R Course Intro to Programming/Intro_R_EAGLE/Data")
+setwd("C:/Users/User/Desktop/R_Course/Intro_R_EAGLE/Data")
 
 df <- read.csv("Steigerwald_sample_points_all_data_subset_withNames.csv")
 
