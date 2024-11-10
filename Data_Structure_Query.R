@@ -1,22 +1,49 @@
 setwd("C:/Users/User/Desktop/R_Course/Intro_R_EAGLE/Data")
 
+library(ggplot2)
+
 #week3
-df <- read.csv("Steigerwald_sample_points_all_data_subset_withNames.csv")
+forest <- read.csv("Steigerwald_sample_points_all_data_subset_withNames.csv")
 
-head(df)
-summary(df)
-View(df)
+head(forest)
+summary(forest)
+View(forest)
 
-str(df) # giving structure just as int, num, character
+str(forest) # giving structure just as int, num, character
 
-df[,c('S2.1','S2.2')]
-df[,4:13]  #all sentinel data
-df[1:10,]
+forest[,c('S2.1','S2.2')]
+forest[,4:13]  #all sentinel data
+forest[1:10,]
 
 #scatterplot
-plot(df[,c("L8.ndvi","SRTM")])
+plot(forest[,c("L8.ndvi","SRTM")])
 
-plot(df$SRTM > 400)  # $ = True / False abfrage
+plot(forest$SRTM > 400)  # $ = True / False abfrage
+
+#ggplot
+ggplot(forest, aes(x=L8.ndvi, y=L8.savi, colour = SRTM)) + 
+  geom_point() + geom_smooth() + facet_wrap(~LCname)
+
+x11()
+
+#week3 slides page 138
+ggplot(forest, aes(x=LCname, y=L8.savi))+geom_boxplot(alpha=.5)
+
+ggplot(forest, aes(x=LCname, y=L8.savi))+geom_boxplot(alpha=.5) +
+  geom_point(aes(colour = SRTM), alpha=.7, size=1.5, position=position_jitter(width=.25, height=0))
+
+
+ggplot(forest) + aes(x=LCname, y=SRTM, colour = L8.ndvi) + 
+  geom_hex()
+                                                                              
+
+ggplot(forest, aes(SRTM,L8.ndvi)) + geom_line(colour="red") + geom_smooth() + 
+  ggtitle('Titel', forest$L8.ndvi)
+
+#Homework Training Sunday 10.11.
+
+ggplot(forest, aes(L8.ndvi,SRTM))+ geom_area(alpha=.6) + geom_point(size=.9,colour="brown",alpha=0.5) +
+  geom_smooth(colour="green") + labs(title = "NDVI to Elevation", x = "NDVI", y = "Elevation")
 
 
 
@@ -73,6 +100,7 @@ df0["A"]
 df0$B[3] #Abfrage mit Bedingung
 
 
+
 #week2 slides 104
 df_a <- data.frame(plot="location_name_1", measure1=runif(100)*1000,measure2=round(runif(100)*100), value=rnorm(100,2,1) ,ID=rep(LETTERS,100)[1:100])
 df_a
@@ -80,6 +108,7 @@ df_a
 df_b <- data.frame(plot="location_name_2", measure1=runif(50)*100,measure2=round(runif(50)*10), value=rnorm(50) ,ID=rep(LETTERS,50)[1:50])
 df_b
 
+#Connect Data Frames
 df_combined <- rbind(df_a, df_b) # row bind ; cbind = column combination
 df_combined
 summary(df_combined)
@@ -90,6 +119,13 @@ df_combined[1:5,c('plot','measure1','measure2')] # [row queryndefinition linr 1 
 
 df_combined[,c('plot','measure1','measure2')]
 
-df_combined['measure2' < 5] # ???
 
+# Query Structure !!!
+df_combined['measure2'][df_combined['measure2']>5] # selcting a vector wih  Column/List measure2 greater 5
+#first [] jumps into the first Column/List, second [] is the condition to select features in that list/column
+df_combined['measure2']>5 # just giving back True / False and no selection
+
+
+v <- data.frame(querry = df_combined['measure2'][df_combined['measure2']>5]) #create a new data.frame with coulmn named querry put in the selevting condition
+v
 
