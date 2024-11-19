@@ -48,9 +48,23 @@ ggplot(df, aes(d,a)) + geom_jitter(alpha=.5, width=.3, color="blue") + geom_boxp
 
 ggplot(df, aes(c)) + geom_bar(color="red") + facet_grid(d ~ .)
 
-ggplot(df, aes(a,b))+geom_point(size=1)+geom_density2d()
+density <- ggplot(df, aes(a,b))+geom_point(size=1)+geom_density2d()
 
-ggplot(df, aes(a,b))+ geom_hex(bins=30)
+hexagon <- ggplot(df, aes(a,b))+ geom_hex(bins=30)
+
+# To plots/diagram in one plot
+install.packages("gridExtra")
+library(gridExtra)
+
+plot(grid.arrange(density,hexagon))
+
+
+# ggbump
+install.packages("ggbump")
+devtools::install_github("davidsjoberg/ggbump")
+
+x11()
+
 
 #theme with theme_set(theme_bw())
 a <- ggplot() + geom_point(data=df, aes(a,b,colour=c))
