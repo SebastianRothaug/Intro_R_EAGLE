@@ -40,12 +40,17 @@ ggplot(forest) + aes(x=LCname, y=SRTM, colour = L8.ndvi) +
 ggplot(forest, aes(SRTM,L8.ndvi)) + geom_line(colour="red") + geom_smooth() + 
   ggtitle('Titel', forest$L8.ndvi)
 
-#Homework Training Sunday 10.11.
+#Homework Training 10.-11.Nov.
 
 ggplot(forest, aes(L8.ndvi,SRTM))+ geom_area(alpha=.6) + geom_point(size=.9,colour="brown",alpha=0.5) +
   geom_smooth(colour="green") + labs(title = "NDVI to Elevation", x = "NDVI", y = "Elevation")
 
+ggplot(forest, aes(L8.ndvi,SRTM))+ geom_area(alpha=.6,fill="grey") + geom_point(size=.9,alpha=0.5, aes(color=LCname)) +
+  geom_smooth(colour="green") + ggtitle("NDVI to Elevation")+ xlab("NDVI")+ ylab("Elevation")     #aes allways refers to the data to colour
 
+ggplot(forest) + geom_bar(aes("L8.ndvi")) + facet_grid(. ~ LCname)
+
+ggplot(forest, aes(x=SRTM,y=LCname)) + geom_boxplot() + geom_jitter(aes(alpha=.1,color=SRTM))
 
 #week2
 X <-  seq(1,100, by=2.5)
@@ -113,7 +118,7 @@ df_combined <- rbind(df_a, df_b) # row bind ; cbind = column combination
 df_combined
 summary(df_combined)
 
-df_combined[,c('plot','measure1','measure2')] # [, column query c is list what columns]
+df_combined[,c('plot','measure1','measure2')] # [, column query c is list what column names to be querried]
 
 df_combined[1:5,c('plot','measure1','measure2')] # [row queryndefinition linr 1 to 5 , column query]
 
@@ -121,11 +126,35 @@ df_combined[,c('plot','measure1','measure2')]
 
 
 # Query Structure !!!
-df_combined['measure2'][df_combined['measure2']>5] # selcting a vector wih  Column/List measure2 greater 5
+df_combined['measure2'][df_combined['measure2']>5] # selcting a vector with  Column/List measure2 greater 5
 #first [] jumps into the first Column/List, second [] is the condition to select features in that list/column
 df_combined['measure2']>5 # just giving back True / False and no selection
 
 
-v <- data.frame(querry = df_combined['measure2'][df_combined['measure2']>5]) #create a new data.frame with coulmn named querry put in the selevting condition
+v <- data.frame(querry = df_combined['measure2'][df_combined['measure2']>5]) #create a new data.frame with coulmn named querry put in the selecting condition
 v
 
+
+# 03.12.2024
+# Convert into Spatial data (read.csv forest  ausführen)
+
+forest.sf <- forest # copy data frame
+
+View(forest.sf)
+
+library(sf)
+
+projcrs <- st_crs(32632) # define projection system
+
+forest.sf <- st_as_sf(x = forest.sf, coords = c("x","y"), crs = projcrs)
+# convert normal dataframe into spatial frame (the forest.sf copy will be overwritten as real .sf)
+
+plot(forest.sf) # output is now a map
+
+st_write(forest.sf, "steigerwald_sf.gpkg") # write the spatial data into a Geopackage or .shp and open in QGIS
+
+
+
+# spatial vector of Germany
+
+germanyQuery <- germany[germany$Name == "Bavaria", ]
